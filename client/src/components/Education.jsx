@@ -1,11 +1,12 @@
+import { motion } from "framer-motion";
 import { GraduationCap, CalendarDays } from "lucide-react";
 import education from "../data/education";
 
-const Education = () => {
+function Education() {
   return (
     <section id="education" className="section">
       <div className="section-heading">
-        <span className="eyebrow">EDUCATION</span>
+        <p className="eyebrow">EDUCATION</p>
 
         <h2>Education & learning.</h2>
 
@@ -15,24 +16,45 @@ const Education = () => {
         </p>
       </div>
 
-      <div className="education-grid">
-        {education.map((item) => (
-          <article className="education-card" key={item.id}>
-            <div className="education-icon">
-              <GraduationCap size={22} />
-            </div>
+      <div className="timeline">
+        {education.map((item, index) => (
+          <motion.article
+            className="timeline-item"
+            key={item.id}
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{
+              duration: 0.5,
+              delay: index * 0.1,
+            }}
+          >
+            <div className="timeline-dot" />
 
-            <div className="education-content">
-              <div className="education-duration">
-                <CalendarDays size={15} />
-                <span>{item.duration}</span>
+            <div className="timeline-content">
+              <div className="education-meta">
+                <span>
+                  <CalendarDays size={14} />
+                  {item.duration}
+                </span>
+
+                <span>
+                  Result: <strong>{item.result}</strong>
+                </span>
               </div>
 
-              <h3>{item.degree}</h3>
+              <div className="education-title">
+                <GraduationCap size={23} />
 
-              <h4>{item.institution}</h4>
+                <div>
+                  <h3>{item.degree}</h3>
+                  <p className="institution">{item.institution}</p>
+                </div>
+              </div>
 
-              <p>{item.description}</p>
+              <p className="education-description">
+                {item.description}
+              </p>
 
               {item.subjects?.length > 0 && (
                 <div className="tech-list">
@@ -42,15 +64,16 @@ const Education = () => {
                 </div>
               )}
 
-              <div className="education-result">
-                Result: <strong>{item.result}</strong>
+              <div className="education-tag">
+                <GraduationCap size={14} />
+                Academic Qualification
               </div>
             </div>
-          </article>
+          </motion.article>
         ))}
       </div>
     </section>
   );
-};
+}
 
 export default Education;
