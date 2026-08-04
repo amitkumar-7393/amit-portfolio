@@ -76,7 +76,7 @@ function Hero() {
           </a>
 
           <a
-            href="mailto:your-email@example.com"
+            href="mailto: kamit948954@gmail.com"
             aria-label="Email"
           >
             <Mail size={20} />
