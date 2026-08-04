@@ -1,98 +1,56 @@
-import { motion } from "framer-motion";
-import {
-  GraduationCap,
-  CalendarDays,
-  MapPin,
-  BookOpen,
-} from "lucide-react";
+import { GraduationCap, CalendarDays } from "lucide-react";
+import education from "../data/education";
 
-const education = [
-  {
-    period: "2024 — 2026",
-    degree: "Master of Computer Applications (MCA)",
-    institution: "Bundelkhand University, Jhansi",
-    location: "Jhansi, Uttar Pradesh, India",
-    description:
-      "Pursuing MCA with a focus on software development, web technologies, programming, databases and modern application development.",
-  },
-  {
-    period: "Completed",
-    degree: "Bachelor's Degree in Computer Applications",
-    institution: "Computer Applications",
-    location: "India",
-    description:
-      "Built a foundation in programming, computer science concepts, web development and software applications.",
-  },
-];
-
-function Education() {
+const Education = () => {
   return (
-    <section id="education" className="section education">
-      <div className="section-heading center">
-        <p className="eyebrow">EDUCATION</p>
+    <section id="education" className="section">
+      <div className="section-heading">
+        <span className="eyebrow">EDUCATION</span>
 
-        <h2>My academic journey.</h2>
+        <h2>Education & learning.</h2>
 
         <p>
-          My academic background has helped me build a strong foundation
-          in computer applications and software development.
+          My academic background and the foundation behind my
+          development journey.
         </p>
       </div>
 
-      <div className="timeline">
-        {education.map((item, index) => (
-          <motion.article
-            className="timeline-item"
-            key={`${item.degree}-${index}`}
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{
-              duration: 0.6,
-              delay: index * 0.15,
-            }}
-          >
-            <div className="timeline-dot" />
+      <div className="education-grid">
+        {education.map((item) => (
+          <article className="education-card" key={item.id}>
+            <div className="education-icon">
+              <GraduationCap size={22} />
+            </div>
 
-            <div className="timeline-content">
-              <div className="education-meta">
-                <span>
-                  <CalendarDays size={15} />
-                  {item.period}
-                </span>
-
-                <span>
-                  <MapPin size={15} />
-                  {item.location}
-                </span>
+            <div className="education-content">
+              <div className="education-duration">
+                <CalendarDays size={15} />
+                <span>{item.duration}</span>
               </div>
 
-              <div className="education-title">
-                <GraduationCap size={27} />
+              <h3>{item.degree}</h3>
 
-                <div>
-                  <h3>{item.degree}</h3>
+              <h4>{item.institution}</h4>
 
-                  <p className="institution">
-                    {item.institution}
-                  </p>
+              <p>{item.description}</p>
+
+              {item.subjects?.length > 0 && (
+                <div className="tech-list">
+                  {item.subjects.map((subject) => (
+                    <span key={subject}>{subject}</span>
+                  ))}
                 </div>
-              </div>
+              )}
 
-              <p className="education-description">
-                {item.description}
-              </p>
-
-              <div className="education-tag">
-                <BookOpen size={15} />
-                Computer Applications & Software Development
+              <div className="education-result">
+                Result: <strong>{item.result}</strong>
               </div>
             </div>
-          </motion.article>
+          </article>
         ))}
       </div>
     </section>
   );
-}
+};
 
 export default Education;
