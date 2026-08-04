@@ -1,50 +1,37 @@
+
 import express from "express";
+
+import {
+  submitContact,
+  listContacts,
+  findContact,
+  removeContact,
+} from "../controllers/contactController.js";
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
-  try {
-    const { name, email, subject, message } = req.body;
+/*
+  POST /api/contact
+  Submit a new contact message
+*/
+router.post("/", submitContact);
 
-    if (!name || !email || !message) {
-      return res.status(400).json({
-        success: false,
-        message: "Name, email and message are required.",
-      });
-    }
+/*
+  GET /api/contact
+  Get all contact messages
+*/
+router.get("/", listContacts);
 
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+/*
+  GET /api/contact/:id
+  Get one contact message
+*/
+router.get("/:id", findContact);
 
-    if (!emailPattern.test(email)) {
-      return res.status(400).json({
-        success: false,
-        message: "Please provide a valid email address.",
-      });
-    }
-
-    const contactMessage = {
-      id: Date.now(),
-      name: name.trim(),
-      email: email.trim().toLowerCase(),
-      subject: subject?.trim() || "Portfolio Contact",
-      message: message.trim(),
-      createdAt: new Date().toISOString(),
-    };
-
-    console.log("New portfolio contact:", contactMessage);
-
-    return res.status(201).json({
-      success: true,
-      message: "Message received successfully.",
-    });
-  } catch (error) {
-    console.error("Contact route error:", error);
-
-    return res.status(500).json({
-      success: false,
-      message: "Unable to process your message.",
-    });
-  }
-});
+/*
+  DELETE /api/contact/:id
+  Delete one contact message
+*/
+router.delete("/:id", removeContact);
 
 export default router;
