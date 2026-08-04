@@ -1,118 +1,30 @@
-import { motion } from "framer-motion";
-import {
-  ArrowUpRight,
-  ExternalLink,
-  Github,
-  FolderCode,
-} from "lucide-react";
+import { ExternalLink, Github, ArrowUpRight } from "lucide-react";
+import projects from "../data/projects";
 
-const projects = [
-  {
-    number: "01",
-    title: "CODSOFT Portfolio",
-    description:
-      "A responsive personal portfolio website developed to showcase frontend development skills, projects and professional information.",
-    technologies: ["HTML", "CSS", "JavaScript"],
-    liveUrl: "https://amitkumar-7393.github.io/CODSOFT/",
-    githubUrl: "https://github.com/amitkumar-7393/CODSOFT",
-  },
-  {
-    number: "02",
-    title: "Cloud QR Attendance Management System",
-    description:
-      "A cloud-based attendance management application designed to simplify attendance tracking with a modern digital workflow.",
-    technologies: ["HTML", "CSS", "JavaScript", "Firebase"],
-    liveUrl: "https://cloud-attendance-system-24c76.web.app/",
-    githubUrl: "https://github.com/amitkumar-7393",
-  },
-  {
-    number: "03",
-    title: "CODSOFT Landing Page",
-    description:
-      "A modern responsive landing page built with a clean layout, structured sections and responsive frontend design.",
-    technologies: ["HTML", "CSS", "JavaScript"],
-    liveUrl:
-      "https://amitkumar-7393.github.io/CODSOFT--Landing--Page/#contact",
-    githubUrl: "https://github.com/amitkumar-7393/CODSOFT--Landing--Page",
-  },
-  {
-    number: "04",
-    title: "CODSOFT Calculator",
-    description:
-      "A responsive calculator application with an interactive interface and JavaScript-powered calculation functionality.",
-    technologies: ["HTML", "CSS", "JavaScript"],
-    liveUrl: "https://amitkumar-7393.github.io/CODSOFT-Calculator.App/",
-    githubUrl: "https://github.com/amitkumar-7393/CODSOFT-Calculator.App",
-  },
-  {
-    number: "05",
-    title: "Bus Pass Portal",
-    description:
-      "A digital bus pass portal designed to provide users with a simple and convenient web-based pass management experience.",
-    technologies: ["HTML", "CSS", "JavaScript"],
-    liveUrl: "https://bus-pass-portal.vercel.app/",
-    githubUrl: "https://github.com/amitkumar-7393/bus-pass-portal",
-  },
-  {
-    number: "06",
-    title: "Event Ticket Booking",
-    description:
-      "A responsive event ticket booking website featuring an interactive interface and user-friendly event browsing experience.",
-    technologies: ["HTML", "CSS", "JavaScript"],
-    liveUrl: "https://amitkumar-7393.github.io/Event-ticket-booking-/",
-    githubUrl: "https://github.com/amitkumar-7393/Event-ticket-booking-",
-  },
-  {
-    number: "07",
-    title: "TCONGS",
-    description:
-      "A deployed web project demonstrating responsive frontend development and a production-ready web experience.",
-    technologies: ["Web Development"],
-    liveUrl: "https://tcongs-six.vercel.app/",
-    githubUrl: "https://github.com/amitkumar-7393",
-  },
-  {
-    number: "08",
-    title: "Lead Desk",
-    description:
-      "A lead management web application designed around organizing and handling lead information through a structured interface.",
-    technologies: ["Web Development"],
-    liveUrl: "https://lead-desk-mini-phi-pied.vercel.app/#leadForm",
-    githubUrl: "https://github.com/amitkumar-7393",
-  },
-];
-
-function Projects() {
+const Projects = () => {
   return (
-    <section id="projects" className="section projects">
+    <section id="projects" className="section">
       <div className="section-heading">
-        <p className="eyebrow">SELECTED WORK</p>
+        <span className="eyebrow">PROJECTS</span>
 
-        <h2>Projects I've built.</h2>
+        <h2>Things I've built.</h2>
 
         <p>
-          A collection of my web development projects, deployed applications
-          and practical development work.
+          A selection of projects demonstrating my experience with
+          responsive design, JavaScript, React and modern web
+          development.
         </p>
       </div>
 
       <div className="projects-grid">
         {projects.map((project, index) => (
-          <motion.article
-            className="project-card"
-            key={project.title}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.15 }}
-            transition={{
-              duration: 0.55,
-              delay: index * 0.06,
-            }}
-          >
+          <article className="project-card" key={project.id}>
             <div className="project-top">
-              <div className="project-number">{project.number}</div>
+              <span className="project-number">
+                {String(index + 1).padStart(2, "0")}
+              </span>
 
-              <FolderCode size={23} />
+              <span>{project.category}</span>
             </div>
 
             <div className="project-content">
@@ -128,41 +40,47 @@ function Projects() {
             </div>
 
             <div className="project-actions">
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="project-link"
-              >
-                <ExternalLink size={17} />
-                Live Demo
-              </a>
+              {project.liveUrl && (
+                <a
+                  className="project-link"
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Live Demo
+                  <ExternalLink size={14} />
+                </a>
+              )}
 
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="project-link"
-              >
-                <Github size={17} />
-                Code
-              </a>
+              {project.githubUrl && (
+                <a
+                  className="project-link"
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GitHub
+                  <Github size={14} />
+                </a>
+              )}
 
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="project-arrow"
-                aria-label={`Open ${project.title}`}
-              >
-                <ArrowUpRight size={19} />
-              </a>
+              {project.liveUrl && (
+                <a
+                  className="project-arrow"
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Open ${project.title}`}
+                >
+                  <ArrowUpRight size={17} />
+                </a>
+              )}
             </div>
-          </motion.article>
+          </article>
         ))}
       </div>
     </section>
   );
-}
+};
 
 export default Projects;
