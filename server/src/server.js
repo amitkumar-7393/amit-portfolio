@@ -5,7 +5,7 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 
 import { checkDatabaseConnection } from "./db.js";
-import contactRoutes from "./routes/contact.js";
+import apiRoutes from "./routes/index.js";
 
 dotenv.config();
 
@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 5000;
 app.use(
   cors({
     origin: "*",
-    methods: ["GET", "POST", "DELETE"],
+    methods: ["GET", "POST", "DELETE", "OPTIONS"],
   })
 );
 
@@ -55,8 +55,8 @@ app.get("/api/health", async (req, res) => {
   }
 });
 
-// Contact API
-app.use("/api/contact", contactRoutes);
+// All API routes
+app.use("/api", apiRoutes);
 
 // 404
 app.use((req, res) => {
@@ -66,7 +66,7 @@ app.use((req, res) => {
   });
 });
 
-// Error handler
+// Global error handler
 app.use((err, req, res, next) => {
   console.error("Server error:", err);
 
@@ -82,7 +82,7 @@ const startServer = async () => {
 
   if (!databaseConnected) {
     console.warn(
-      "Warning: Database is not connected. Check DATABASE_URL."
+      "Warning: Database is not connected. DATABASE_URL is not configured yet."
     );
   }
 
