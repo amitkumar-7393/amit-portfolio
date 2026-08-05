@@ -1,49 +1,31 @@
-const API_BASE_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const FORMSPREE_URL = "https://formspree.io/f/mrpzgpng";
 
-const request = async (endpoint, options = {}) => {
-  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+export const submitContactForm = async (formData) => {
+  const response = await fetch(FORMSPREE_URL, {
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
-      ...(options.headers || {}),
+      Accept: "application/json",
     },
-    ...options,
+    body: JSON.stringify(formData),
   });
 
-  let data;
-
-  try {
-    data = await response.json();
-  } catch {
-    data = {
-      success: false,
-      message: "Invalid server response.",
-    };
-  }
+  const data = await response.json();
 
   if (!response.ok) {
     throw new Error(
-      data.message || `Request failed with status ${response.status}`
+      data?.errors?.[0]?.message ||
+        data?.message ||
+        "Unable to send message."
     );
   }
 
-  return data;
-};
-
-export const submitContactForm = async (formData) => {
-  return request("/contact", {
-    method: "POST",
-    body: JSON.stringify(formData),
-  });
-};
-
-export const checkApiHealth = async () => {
-  return request("/health", {
-    method: "GET",
-  });
+  return {
+    success: true,
+    message: "Message sent successfully.",
+  };
 };
 
 export default {
   submitContactForm,
-  checkApiHealth,
 };
