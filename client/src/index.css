@@ -300,25 +300,69 @@ main {
 
 .profile-3d {
   width: min(320px, 80vw);
-  aspect-ratio: 1;
-  display: grid;
-  place-items: center;
-  border: 1px solid #303030;
-  border-radius: 35px;
-  background: #090909;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
-  overflow: hidden;
+  height: min(320px, 80vw);
+  position: relative;
   transform-style: preserve-3d;
-  perspective: 1000px;
+  perspective: 1200px;
 }
 
-.profile-image {
+.profile-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #303030;
+  background: #090909;
+  border-radius: 30px;
+  overflow: hidden;
+  backface-visibility: visible;
+}
+
+.profile-front {
+  transform: translateZ(35px);
+}
+
+.profile-back {
+  transform: rotateY(180deg) translateZ(35px);
+  display: grid;
+  place-items: center;
+  font-size: 70px;
+  font-weight: 800;
+}
+
+.profile-right {
+  width: 70px;
+  right: -35px;
+  transform: rotateY(90deg);
+  background: #111;
+}
+
+.profile-left {
+  width: 70px;
+  left: -35px;
+  transform: rotateY(-90deg);
+  background: #111;
+}
+
+.profile-top {
+  height: 70px;
+  top: -35px;
+  transform: rotateX(90deg);
+  background: #151515;
+}
+
+.profile-bottom {
+  height: 70px;
+  bottom: -35px;
+  transform: rotateX(-90deg);
+  background: #070707;
+}
+
+.profile-front img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 35px;
   display: block;
-}
+  }
 
 .profile-initials {
   font-size: clamp(4rem, 10vw, 7rem);
