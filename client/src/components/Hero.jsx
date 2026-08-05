@@ -95,16 +95,23 @@ function Hero() {
   className="profile-3d"
   animate={{ rotateY: [0, 360] }}
   transition={{
-    duration: 10,
+    duration: 8,
     repeat: Infinity,
     ease: "linear",
   }}
 >
-  <img
-    src="/profile.jpg"
-    alt="Amit Kumar"
-    className="profile-image"
-  />
+  <div className="profile-face profile-front">
+    <img src="/profile.jpg" alt="Amit Kumar" />
+  </div>
+
+  <div className="profile-face profile-back">
+    <span>AK</span>
+  </div>
+
+  <div className="profile-face profile-right"></div>
+  <div className="profile-face profile-left"></div>
+  <div className="profile-face profile-top"></div>
+  <div className="profile-face profile-bottom"></div>
 </motion.div>
         
 
