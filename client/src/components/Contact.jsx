@@ -100,7 +100,7 @@ const Contact = () => {
 
               <div>
                 <span>Email</span>
-                <a href="mailto: kamit948954@gmail.com">
+                <a href="mailto:kamit948954@gmail.com">
                   kamit948954@gmail.com
                 </a>
               </div>
