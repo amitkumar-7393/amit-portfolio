@@ -92,26 +92,50 @@ function Hero() {
       >
 
 <motion.div
-  className="profile-3d"
-  animate={{ rotateY: [0, 360] }}
+  className="profile-3d cinematic-box"
+  animate={{
+    rotateY: [0, 360],
+    rotateX: [0, 4, 0, -4, 0],
+  }}
   transition={{
-    duration: 8,
-    repeat: Infinity,
-    ease: "linear",
+    rotateY: {
+      duration: 12,
+      repeat: Infinity,
+      ease: "linear",
+    },
+    rotateX: {
+      duration: 6,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  }}
+  whileHover={{
+    scale: 1.04,
   }}
 >
+  <div className="box-glow" />
+
   <div className="profile-face profile-front">
+    <div className="image-overlay" />
     <img src="/profile.jpg" alt="Amit Kumar" />
+    <span className="face-label">AMIT KUMAR</span>
   </div>
 
   <div className="profile-face profile-back">
-    <span>AK</span>
+    <span className="back-logo">AK</span>
+    <small>FULL STACK DEVELOPER</small>
   </div>
 
-  <div className="profile-face profile-right"></div>
-  <div className="profile-face profile-left"></div>
-  <div className="profile-face profile-top"></div>
-  <div className="profile-face profile-bottom"></div>
+  <div className="profile-face profile-right">
+    <span>&lt;/&gt;</span>
+  </div>
+
+  <div className="profile-face profile-left">
+    <span>{"{ }"}</span>
+  </div>
+
+  <div className="profile-face profile-top" />
+  <div className="profile-face profile-bottom" />
 </motion.div>
         
 
