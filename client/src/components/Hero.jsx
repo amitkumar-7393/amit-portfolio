@@ -90,9 +90,23 @@ function Hero() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8 }}
       >
-        <div className="profile-placeholder">
-          <div className="profile-initials">AK</div>
-        </div>
+
+<motion.div
+  className="profile-3d"
+  animate={{ rotateY: [0, 360] }}
+  transition={{
+    duration: 10,
+    repeat: Infinity,
+    ease: "linear",
+  }}
+>
+  <img
+    src="/profile.jpg"
+    alt="Amit Kumar"
+    className="profile-image"
+  />
+</motion.div>
+        
 
         <motion.div
           className="floating-card card-one"
